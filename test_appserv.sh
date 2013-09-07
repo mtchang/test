@@ -1,6 +1,7 @@
 #!/bin/bash
 # usage: ./test_appserv.sh 111.10.1.1
 # by mtchang.tw@gmail.com 
+# 使用說明：test_appserv.README
 IP=$1
 echo "$IP checking...."
 echo $IP > test_appserv.log
