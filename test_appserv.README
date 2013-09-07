@@ -1,4 +1,3 @@
-
 # 環境 linux mint 
 [mtchang@power appserve_test]$ cat test_appserv.sh 
 #!/bin/bash
@@ -37,10 +36,27 @@ fi
 111.118.71.1 checking....
 
 # 看起來三個條件都符合的主機
-[mtchang@power appserve_test]$ ./test_appserv.sh 140.125.30.192 
-140.125.30.192 checking....
-140.125.30.192 phpMyAdmin/scripts/ found
-140.125.30.192 setup.php found
+[mtchang@power appserve_test]$ ./test_appserv.sh 110.125.30.192 
+110.125.30.192 checking....
+110.125.30.192 phpMyAdmin/scripts/ found
+110.125.30.192 setup.php found
+110.125.30.192 (Win32) found
 
 
-140.125.30.192 (Win32) found
+# 當然你也可以寫成批次列表大量檢測
+[mtchang@power appserve_test]$ cat test.list 
+#!/bin/bash
+./test_appserv.sh 111.11.69.64
+./test_appserv.sh 140.111.71.127
+./test_appserv.sh 140.117.69.68
+./test_appserv.sh 140.115.30.192
+[mtchang@power appserve_test]$ sh test.list 
+111.11.69.64 checking....
+140.111.71.127 checking....
+140.117.69.68 checking....
+140.115.30.192 checking....
+140.115.30.192 phpMyAdmin/scripts/ found
+140.115.30.192 setup.php found
+140.115.30.192 (Win32) found
+
+# 以上案例經過修改，不代表真實主機
