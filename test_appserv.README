@@ -1,0 +1,46 @@
+
+# 環境 linux mint 
+[mtchang@power appserve_test]$ cat test_appserv.sh 
+#!/bin/bash
+# usage: ./test_appserv.sh 111.10.1.1
+# by mtchang.tw@gmail.com 
+IP=$1
+echo "$IP checking...."
+echo $IP > test_appserv.log
+
+echo "wget --tries=1 --connect-timeout=3 http://${IP}/phpMyAdmin/scripts/  -O ${IP}.txt 2> ${IP}.txt" | bash 
+if [ "$?" == "0" ]; then
+        echo "$IP phpMyAdmin/scripts/ found"
+fi
+
+grep --color 'setup.php' ${IP}.txt >> test_appserv.log
+if [ "$?" == "0" ]; then
+	echo "$IP setup.php found"
+fi
+
+grep --color '(Win32)' ${IP}.txt  >> test_appserv.log
+if [ "$?" == "0" ]; then
+        echo "$IP (Win32) found"
+fi
+
+# 賦予可執行權限
+[mtchang@power appserve_test]$ chmod +x test_appserv.sh 
+
+# 測試某個網域內的 IP , 他有發現疑似 APPSERV 的存在, 但是少了 setup.php
+[mtchang@power appserve_test]$ ./test_appserv.sh 111.118.71.127
+111.118.71.127 checking....
+111.118.71.127 phpMyAdmin/scripts/ found
+111.118.71.127 (Win32) found
+
+# 看起來沒問題的主機
+[mtchang@power appserve_test]$ ./test_appserv.sh 111.118.71.1
+111.118.71.1 checking....
+
+# 看起來三個條件都符合的主機
+[mtchang@power appserve_test]$ ./test_appserv.sh 140.125.30.192 
+140.125.30.192 checking....
+140.125.30.192 phpMyAdmin/scripts/ found
+140.125.30.192 setup.php found
+
+
+140.125.30.192 (Win32) found
