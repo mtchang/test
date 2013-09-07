@@ -1,4 +1,7 @@
-# 環境 linux mint 
+# 說明檔案：test_appserv.sh 的使用說明
+# 測試環境 linux mint 
+# bash shell
+
 [mtchang@power appserve_test]$ cat test_appserv.sh 
 #!/bin/bash
 # usage: ./test_appserv.sh 111.10.1.1
